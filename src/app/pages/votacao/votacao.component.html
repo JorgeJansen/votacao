@@ -1,0 +1,36 @@
+<div class="container py-5">
+  <div class="row text-white bg-primary rounded my-2 py-2">
+    <div class="col-6">
+      Câmera Municipal
+    </div>
+    <div class="col-6 text-end">
+      {{ today | date: 'fullDate' }}
+    </div>
+  </div>
+  <div class="row gap-3">
+    <div class="col-12 text-center bg-primary rounded">
+      <h3 class="pt-1">ESCOLHA SEU VOTO</h3>
+    </div>
+    <div class="col-12 text-center bg-primary rounded">
+      <h3 class="pt-1">{{projeto?.num_projeto}} - {{projeto?.nome_proj}}</h3>
+    </div>
+    <div class="col-12 text-white">
+      <h5>{{vereador?.nome}} - {{vereador?.partido}}</h5>
+    </div>
+  </div>
+  <div class="row gap-3 justify-content-center py-5 my-5">
+    @if (votacao?.voto === 'S' || votacao?.voto === 'N') {
+    <strong class="fs-1 text-center">O seu voto já foi computado como {{votacao?.voto ? 'SIM' : 'NÃO'}}</strong>
+    } @else if (votacao?.presente && votacao?.voto === '') {
+    <strong class="fs-1 text-center">Você se absteve dessa votação</strong>
+    } @else {
+    <button type="button" class="btn btn-lg btn-outline-primary col-2" (click)="computarVoto('S')">SIM</button>
+    <button type="button" class="btn btn-lg btn-warning col-2" (click)="computarVoto('A')">ABSTENÇÃO</button>
+    <button type="button" class="btn btn-lg btn-danger col-2" (click)="computarVoto('N')">NÃO</button>
+    }
+  </div>
+  <div class="d-flex gap-3">
+    <button class="btn btn-primary" [routerLink]="['/home/', projetoId]">Voltar</button>
+    <button class="btn btn-primary" [routerLink]="['/home']">Home</button>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container py-5">
+  <div class="row gap-3 justify-content-around py-4 border-top">
+    <div class="col-12">
+      <table class="table table-dark align-middle">
+        <thead>
+          <tr>
+            <th scope="col" colspan="5"></th>
+            <th scope="col" colspan="3" class="text-center">Total</th>
+            <th scope="col"></th>
+          </tr>
+          <tr>
+            <th scope="col">Nº</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Documento</th>
+            <th scope="col">Votado</th>
+            <th scope="col">Data</th>
+            <th scope="col">Abstenções</th>
+            <th scope="col">Sim</th>
+            <th scope="col">Não</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of dataTable; let i = $index; track i) {
+          <tr>
+            <td class="text-success" data-title="Nº">{{ item.num_projeto }}</td>
+            <td class="text-warning" data-title="Nome">{{ item.nome_proj }}</td>
+            <td class="text-warning" data-title="Descrição">{{ item.descricao_proj }}</td>
+            <td class="text-warning" data-title="Documento">{{ item.pdf }}</td>
+            <td class="text-warning text-center" data-title="Votado">{{ item.flg_votacao_proj ? 'Sim' : 'Não' }}</td>
+            <td class="text-warning" data-title="Data">{{ item.dta_votacao }}</td>
+            <td class="text-warning text-center" data-title="Abstenções">{{ item.abstencao }}</td>
+            <td class="text-warning text-center" data-title="Sim">{{ item.sim }}</td>
+            <td class="text-warning text-center" data-title="Não">{{ item.nao }}</td>
+            <td class="text-warning text-center" data-title="Ações">
+              <em *ngIf="item.flg_votacao_proj" [routerLink]="[ '/home/', item.id ]" class="bi bi-view-list fs-3"
+                role="button"></em>
+              <em *ngIf="!item.flg_votacao_proj" [routerLink]="[ '/home', item.id ]" class="bi bi-pencil-square fs-3"
+                role="button"></em>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="d-flex gap-3">
+    <button class="btn btn-primary" [routerLink]="['/home']">Home</button>
+  </div>
+</div>

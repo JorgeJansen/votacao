@@ -1,0 +1,114 @@
+<div class="container py-5">
+  <div class="row gap-3 justify-content-around">
+    <div class="col-5">
+      Câmera Municipal
+    </div>
+    <div class="col-5 text-end">
+      {{ today | date: 'fullDate' }}
+    </div>
+  </div>
+  <ng-container *ngIf="projetoId; else semProjeto">
+    <div class="row gap-3 justify-content-around py-4 border-top">
+      <div class="col-5">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">Nome</th>
+              <th scope="col">Partido</th>
+              <th scope="col">Voto</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (vereador of vereadores; let i = $index; track i) {
+            <tr>
+              <td class="text-success fw-bold">{{ vereador.nome | uppercase }}</td>
+              <td class="text-warning fw-bold">{{ vereador.partido }}</td>
+              <td [routerLink]="['/votacao', projetoId, vereador.id]" role="button"
+                [ariaDisabled]="!projeto?.flg_votacao_proj">
+                @if (vereador?.votacao?.voto == 'S') {
+                <span class="badge text-bg-success">S</span>
+                } @else if (vereador?.votacao?.voto == 'N') {
+                <span class="badge text-bg-danger">N</span>
+                } @else if (vereador?.votacao?.voto == 'A') {
+                <span class="badge text-bg-info">A</span>
+                } @else {
+                <span class="badge text-bg-warning">
+                  {{vereador?.votacao?.presente ? 'P' : ''}}
+                </span>
+                }
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <div class="col-5">
+        <div class="row">
+          <div class="col-12 pb-4">
+            <strong class="text-warning" [innerHTML]="">
+              Projeto de Resolução Nº 7/2025 - Mesa
+              Mesa Diretora 2024/2025
+              PRORROGA A VIGÊNCIA DO PROJETO DE RESOLUÇÃO Nº 7/2024, DE 20 DE MARÇO DE 2024, QUE DISPÕE SOBRE A CRIAÇÃO
+              DO
+              PROJETO "CÂMARA JOVEM", E DÁ OUTRAS PROVIDÊNCIAS.
+            </strong>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12 text-center bg-primary-subtle">
+                <h3 class="pt-1">
+                  {{projeto?.flg_votacao_proj ? 'EM VOTAÇÃO' : 'NÃO LIBERADA PARA VOTAÇÃO'}}
+                </h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="row align-items-center my-5 py-5">
+                  <div class="col-12 text-center mb-0 fw-bold fs-3">
+                    {{ today | date: 'shortTime' }}
+                  </div>
+                  <div class="col-12 text-center mb-0 fw-bold fs-3">
+                    15:00
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 py-3 fs-4 fw-bold">
+                <p class="text-center text-warning mb-0">Presentes {{presentes| padLeft:2}}</p>
+                <p class="text-center text-warning mb-0">Ausentes {{ausentes| padLeft:2}}</p>
+                <table class="table table-dark">
+                  <tbody>
+                    <tr>
+                      <td class="text-success">Sim</td>
+                      <td class="text-success">{{votosSim | padLeft:2}}</td>
+                    </tr>
+                    <tr>
+                      <td class="text-danger">Não</td>
+                      <td class="text-danger">{{votosNao | padLeft:2}}</td>
+                    </tr>
+                    <tr>
+                      <td class="text-info">Total</td>
+                      <td class="text-info">{{totalVotos | padLeft:2}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex gap-3">
+      <button class="btn btn-primary" (click)="getListVereadores()">Update</button>
+      <button class="btn btn-primary" [routerLink]="['/home']">Home</button>
+      <button class="btn btn-primary" [routerLink]="['/vereadores']">Cadastro de vereadores</button>
+      <button class="btn btn-primary" [routerLink]="['/projetos']">Verificar Projetos</button>
+    </div>
+  </ng-container>
+  <ng-template #semProjeto>
+    <h1>SEJAM BEM VINDOS</h1>
+    <div class="d-flex gap-3">
+      <button class="btn btn-primary" [routerLink]="['/vereadores']">Cadastro de vereadores</button>
+      <button class="btn btn-primary" [routerLink]="['/projetos']">Verificar Projetos</button>
+    </div>
+  </ng-template>
+</div>

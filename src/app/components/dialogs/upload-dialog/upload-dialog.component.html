@@ -1,0 +1,23 @@
+<div class="modal fade show d-block" style="background-color: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ data.title }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+      </div>
+      <div class="modal-body pb-0">
+        <p>{{ data.message }}</p>
+        <div class="d-inline-block justify-content-start align-items-center lh-0">
+          <button class="btn btn-primary" (click)="fileI.click()">Selecionar Arquivo</button>
+          <span class="ms-2">{{file.name}}</span>
+          <p class="text-danger mb-0 fs-7">{{validate}}</p>
+          <input type="file" class="invisible h-0" #fileI (change)="onFileSelected($event)" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="close()">Cancelar</button>
+        <button class="btn btn-primary" (click)="uploadImage()" [disabled]="validate">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
