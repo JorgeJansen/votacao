@@ -2,60 +2,56 @@
   "vereador": [
     {
       "id": "1",
-      "foto": {},
+      "foto": "",
       "nome": "John Doe",
       "partido": "PSDB",
       "presidente": true
     },
     {
       "id": "2",
-      "foto": {
-        "id": "f8a7"
-      },
+      "foto": "f8a7",
       "nome": "Jane Smith",
       "partido": "PTB",
       "presidente": false
     },
     {
       "id": "3",
-      "foto": {
-        "id": "cec6"
-      },
+      "foto": "cec6",
       "nome": "Alice Johnson",
       "partido": "SOLIDARIEDADE",
       "presidente": false
     },
     {
       "id": "4",
-      "foto": {},
+      "foto": "",
       "nome": "Bob Brown",
       "partido": "CIDADANIA",
       "presidente": false
     },
     {
       "id": "5",
-      "foto": {},
+      "foto": "",
       "nome": "Charlie White",
       "partido": "PSL",
       "presidente": false
     },
     {
       "id": "6",
-      "foto": {},
+      "foto": "",
       "nome": "Diana Green",
       "partido": "PT",
       "presidente": false
     },
     {
       "id": "7",
-      "foto": {},
+      "foto": "",
       "nome": "Ethan Blue",
       "partido": "PL",
       "presidente": false
     },
     {
       "id": "8",
-      "foto": {},
+      "foto": "",
       "nome": "Fiona Black",
       "partido": "MDB",
       "presidente": false
@@ -64,24 +60,24 @@
   "projeto": [
     {
       "id": "f5ef",
-      "num_projeto": "0123456",
-      "nome_proj": "Projeto XYZ",
-      "descricao_proj": "PRORROGA A VIGÊNCIA DO PROJETO DE RESOLUÇÃO Nº 7/2024, DE 20 DE MARÇO DE 2024, QUE DISPÕE SOBRE A CRIAÇÃO DO PROJETO \"CÂMARA JOVEM\", E DÁ OUTRAS PROVIDÊNCIAS.",
+      "numProjeto": "0123456",
+      "nomProjeto": "Projeto XYZ",
+      "desProjeto": "PRORROGA A VIGÊNCIA DO PROJETO DE RESOLUÇÃO Nº 7/2024, DE 20 DE MARÇO DE 2024, QUE DISPÕE SOBRE A CRIAÇÃO DO PROJETO \"CÂMARA JOVEM\", E DÁ OUTRAS PROVIDÊNCIAS.",
       "pdf": "",
-      "flg_votacao_proj": true,
-      "dta_votacao": "25/07/2025",
+      "flgVotacaoProj": true,
+      "dtaVotacao": "25/07/2025",
       "abstencao": 2,
       "sim": 4,
       "nao": 1
     },
     {
       "id": "e2b6",
-      "num_projeto": "0456789",
-      "nome_proj": "Projeto WNA",
-      "descricao_proj": "Descrição detalhada",
+      "numProjeto": "0456789",
+      "nomProjeto": "Projeto WNA",
+      "desProjeto": "Descrição detalhada",
       "pdf": "",
-      "flg_votacao_proj": false,
-      "dta_votacao": "25/08/2025",
+      "flgVotacaoProj": false,
+      "dtaVotacao": "25/08/2025",
       "abstencao": 0,
       "sim": 0,
       "nao": 0
@@ -90,57 +86,57 @@
   "votacao": [
     {
       "id": "58de",
-      "cod_vereador": "1",
-      "num_projeto": "0123456",
+      "codVereador": "1",
+      "numProjeto": "0123456",
       "presente": true,
       "voto": "S"
     },
     {
       "id": "843e",
-      "cod_vereador": "2",
-      "num_projeto": "0123456",
+      "codVereador": "2",
+      "numProjeto": "0123456",
       "presente": true,
       "voto": "N"
     },
     {
       "id": "e2dc",
-      "cod_vereador": "3",
-      "num_projeto": "0123456",
+      "codVereador": "3",
+      "numProjeto": "0123456",
       "presente": true,
       "voto": "S"
     },
     {
       "id": "a2e0",
-      "cod_vereador": "4",
-      "num_projeto": "0123456",
+      "codVereador": "4",
+      "numProjeto": "0123456",
       "presente": false,
       "voto": ""
     },
     {
       "id": "3de9",
-      "cod_vereador": "5",
-      "num_projeto": "0123456",
+      "codVereador": "5",
+      "numProjeto": "0123456",
       "presente": true,
       "voto": "S"
     },
     {
       "id": "8bab",
-      "cod_vereador": "6",
-      "num_projeto": "0123456",
+      "codVereador": "6",
+      "numProjeto": "0123456",
       "presente": true,
       "voto": "A"
     },
     {
       "id": "6ced",
-      "cod_vereador": "7",
-      "num_projeto": "0123456",
+      "codVereador": "7",
+      "numProjeto": "0123456",
       "presente": true,
       "voto": "S"
     },
     {
       "id": "785f",
-      "cod_vereador": "8",
-      "num_projeto": "0123456",
+      "codVereador": "8",
+      "numProjeto": "0123456",
       "presente": false,
       "voto": ""
     }

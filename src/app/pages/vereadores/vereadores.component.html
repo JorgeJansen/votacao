@@ -14,9 +14,9 @@
           @for (item of dataTable; let i = $index; track i) {
           <tr>
             <td class="text-primary text-center" [style.width.px]="70">
-              @if(item?.foto?.data) {
+              @if(item?.image?.data) {
               <img
-                style="background-image: url({{item.foto.data}}); background-size: cover; backdrop-filter: contrast(0.5);"
+                style="background-image: url({{item.image.data}}); background-size: cover; backdrop-filter: contrast(0.5);"
                 class="rounded-circle" width="40" height="40" alt="" />
               }@else{
               <i class="bi bi-cloud-upload-fill fs-3" (click)="uploadDialog(item)" role="button"></i>

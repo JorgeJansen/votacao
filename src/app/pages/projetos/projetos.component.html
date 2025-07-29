@@ -24,19 +24,19 @@
         <tbody>
           @for (item of dataTable; let i = $index; track i) {
           <tr>
-            <td class="text-success" data-title="Nº">{{ item.num_projeto }}</td>
-            <td class="text-warning" data-title="Nome">{{ item.nome_proj }}</td>
-            <td class="text-warning" data-title="Descrição">{{ item.descricao_proj }}</td>
+            <td class="text-success" data-title="Nº">{{ item.numProjeto }}</td>
+            <td class="text-warning" data-title="Nome">{{ item.nomProjeto }}</td>
+            <td class="text-warning" data-title="Descrição">{{ item.desProjeto }}</td>
             <td class="text-warning" data-title="Documento">{{ item.pdf }}</td>
-            <td class="text-warning text-center" data-title="Votado">{{ item.flg_votacao_proj ? 'Sim' : 'Não' }}</td>
-            <td class="text-warning" data-title="Data">{{ item.dta_votacao }}</td>
+            <td class="text-warning text-center" data-title="Votado">{{ item.flgVotacaoProj ? 'Sim' : 'Não' }}</td>
+            <td class="text-warning" data-title="Data">{{ item.dtaVotacao }}</td>
             <td class="text-warning text-center" data-title="Abstenções">{{ item.abstencao }}</td>
             <td class="text-warning text-center" data-title="Sim">{{ item.sim }}</td>
             <td class="text-warning text-center" data-title="Não">{{ item.nao }}</td>
             <td class="text-warning text-center" data-title="Ações">
-              <em *ngIf="item.flg_votacao_proj" [routerLink]="[ '/home/', item.id ]" class="bi bi-view-list fs-3"
+              <em *ngIf="item.flgVotacaoProj" [routerLink]="[ '/home/', item.id ]" class="bi bi-view-list fs-3"
                 role="button"></em>
-              <em *ngIf="!item.flg_votacao_proj" [routerLink]="[ '/home', item.id ]" class="bi bi-pencil-square fs-3"
+              <em *ngIf="!item.flgVotacaoProj" [routerLink]="[ '/home', item.id ]" class="bi bi-pencil-square fs-3"
                 role="button"></em>
             </td>
           </tr>

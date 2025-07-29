@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit {
     this.totalVotos = 0
 
     for (let vereador of this.vereadores) {
-      const filter = { num_projeto: this.projeto.num_projeto, cod_vereador: vereador.id }
+      const filter = { numProjeto: this.projeto.numProjeto, codVereador: vereador.id }
       const $res = await this.votacaoService.getAll(filter)
       vereador.votacao = $res?.find(x => x)
 

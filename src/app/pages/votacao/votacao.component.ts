@@ -43,15 +43,15 @@ export class VotacaoComponent implements OnInit {
     this.projeto = await this.projetoService.getById(this.projetoId)
     this.vereador = await this.vereadorService.getById(this.vereadorId)
 
-    const filter = { num_projeto: this.projeto.num_projeto, cod_vereador: this.vereador.id }
+    const filter = { numProjeto: this.projeto.numProjeto, codVereador: this.vereador.id }
     const $vot = await this.votacaoService.getAll(filter)
     this.votacao = $vot?.find(x => x)
   }
 
   async computarVoto(voto: string) {
     const body = {
-      cod_vereador: this.vereadorId,
-      num_projeto: this.projeto.num_projeto,
+      codVereador: this.vereadorId,
+      numProjeto: this.projeto.numProjeto,
       presente: true,
       voto: voto
     }

@@ -34,8 +34,8 @@ export class VereadoresComponent implements OnInit {
   async getData() {
     this.dataTable = await this.vereadorService.getAll()
     for (let item of this.dataTable) {
-      if (item.foto?.id) {
-        item.foto = await this.imageService.getById(item.foto.id)
+      if (item.foto) {
+        item.image = await this.imageService.getById(item.foto)
       }
     }
     this.cdr.detectChanges()
@@ -46,7 +46,7 @@ export class VereadoresComponent implements OnInit {
       title: 'Upload',
       message: 'Selecione a imagem',
     }, UploadDialogComponent).then(async (file) => {
-      item.foto.id = file.id
+      item.foto = file.id
       await this.vereadorService.update(item.id, item)
       this.getData()
     }).catch(() => {

@@ -24,7 +24,7 @@
               <td class="text-success fw-bold">{{ vereador.nome | uppercase }}</td>
               <td class="text-warning fw-bold">{{ vereador.partido }}</td>
               <td [routerLink]="['/votacao', projetoId, vereador.id]" role="button"
-                [ariaDisabled]="!projeto?.flg_votacao_proj">
+                [ariaDisabled]="!projeto?.flgVotacaoProj">
                 @if (vereador?.votacao?.voto == 'S') {
                 <span class="badge text-bg-success">S</span>
                 } @else if (vereador?.votacao?.voto == 'N') {
@@ -57,7 +57,7 @@
             <div class="row">
               <div class="col-12 text-center bg-primary-subtle">
                 <h3 class="pt-1">
-                  {{projeto?.flg_votacao_proj ? 'EM VOTAÇÃO' : 'NÃO LIBERADA PARA VOTAÇÃO'}}
+                  {{projeto?.flgVotacaoProj ? 'EM VOTAÇÃO' : 'NÃO LIBERADA PARA VOTAÇÃO'}}
                 </h3>
               </div>
             </div>
