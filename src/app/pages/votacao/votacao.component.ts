@@ -45,7 +45,7 @@ export class VotacaoComponent implements OnInit {
 
     const filter = { numProjeto: this.projeto.numProjeto, codVereador: this.vereador.id }
     const $vot = await this.votacaoService.getAll(filter)
-    this.votacao = $vot?.find(x => x)
+    this.votacao = $vot?.find((x: any) => x)
   }
 
   async computarVoto(voto: string) {
@@ -56,6 +56,6 @@ export class VotacaoComponent implements OnInit {
       voto: voto
     }
     await this.votacaoService.save(body);
-    this.router.navigate(['/Home/', this.projetoId])
+    this.router.navigate(['/home/', this.projetoId])
   }
 }

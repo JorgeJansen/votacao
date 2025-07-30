@@ -8,23 +8,36 @@
             <th scope="col">Nome</th>
             <th scope="col">Partido</th>
             <th scope="col">Presidente</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          @for (item of dataTable; let i = $index; track i) {
+          @for (item of dataTable; let i = $index; track item?.id) {
           <tr>
             <td class="text-primary text-center" [style.width.px]="70">
-              @if(item?.image?.data) {
+              @if (item?.image?.data) {
               <img
-                style="background-image: url({{item.image.data}}); background-size: cover; backdrop-filter: contrast(0.5);"
+                style="background-image: url({{item?.image.data}}); background-size: cover; backdrop-filter: contrast(0.5);"
                 class="rounded-circle" width="40" height="40" alt="" />
-              }@else{
+              } @else {
               <i class="bi bi-cloud-upload-fill fs-3" (click)="uploadDialog(item)" role="button"></i>
               }
             </td>
-            <td class="text-warning fw-bold">{{ item.nome }}</td>
-            <td class="text-warning fw-bold">{{ item.partido }}</td>
-            <td class="text-warning fw-bold">{{ item.presidente ? 'Sim' : 'Não' }}</td>
+            <td class="text-warning fw-bold">
+              {{ item?.nomVereador }}
+            </td>
+            <td class="text-warning fw-bold">
+              {{ item?.sglPartido }}
+            </td>
+            <td class="text-warning fw-bold ps-4">
+              {{ item?.indPresidente ? 'Sim' : 'Não' }}
+            </td>
+            <td>
+              <div class="d-flex align-items-center">
+                <em class="bi bi-pencil-square fs-3 text-warning fs-3" (click)="edit(item)"></em>
+                <em class="bi bi-dash-square-dotted text-danger ms-2 fs-3" (click)="excluir(item)"></em>
+              </div>
+            </td>
           </tr>
           }
         </tbody>
@@ -33,5 +46,6 @@
   </div>
   <div class="d-flex gap-3">
     <button class="btn btn-primary" [routerLink]="['/home']">Home</button>
+    <button class="btn btn-primary" (click)="novoVereador()">Novo</button>
   </div>
 </div>

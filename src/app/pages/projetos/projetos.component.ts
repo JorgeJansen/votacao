@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ConfirmComponent } from '../../components/dialogs/confirm/confirm.component';
+import { ProjetoDialogComponent } from '../../components/dialogs/projeto-dialog/projeto-dialog.component';
+import { DialogService } from '../../services/dialog.service';
 import { CrudProjetoService } from './../../services/crud-projeto.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-projetos',
@@ -13,11 +16,12 @@ import { CommonModule } from '@angular/common';
 })
 export class ProjetosComponent implements OnInit {
 
-  dataTable?: any[] | null = []
+  dataTable: any = []
 
   constructor(
     private crd: ChangeDetectorRef,
-    private vereadorService: CrudProjetoService
+    private dialogService: DialogService,
+    private projetoService: CrudProjetoService
   ) { }
 
   ngOnInit() {
@@ -29,8 +33,46 @@ export class ProjetosComponent implements OnInit {
   }
 
   async getData() {
-    this.dataTable = await this.vereadorService.getAll()
+    this.dataTable = await this.projetoService.getAll()
     this.crd.detectChanges()
+  }
+
+  edit(row: any) {
+    this.dialogService.open({
+      title: 'Editar',
+      message: 'Dados do projeto',
+      edit: row
+    }, ProjetoDialogComponent).then(async (item) => {
+      await this.projetoService.update(row.id, item)
+      await this.getData()
+    }).catch(() => {
+      console.log('Usuário cancelou ou fechou')
+    })
+  }
+
+  async excluir(item: any) {
+    this.dialogService.open({
+      title: 'Excluir',
+      message: `Tem certeza que deseja remover os dados do projeto ${item.numProjeto}`,
+    }, ConfirmComponent).then(async () => {
+      await this.projetoService.delete(item.id)
+      await this.getData()
+    }).catch(() => {
+      console.log('Usuário cancelou ou fechou')
+    })
+  }
+
+  novoProjeto() {
+    this.dialogService.open({
+      title: 'Cadastro',
+      message: 'Dados do novo projeto',
+
+    }, ProjetoDialogComponent).then(async (item) => {
+      await this.projetoService.save(item)
+      await this.getData()
+    }).catch(() => {
+      console.log('Usuário cancelou ou fechou')
+    })
   }
 
   reload() {

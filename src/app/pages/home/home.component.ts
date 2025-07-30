@@ -5,6 +5,7 @@ import moment from 'moment';
 import { CrudProjetoService } from '../../services/crud-projeto.service';
 import { CrudVereadorService } from '../../services/crud-vereador.service';
 import { CrudVotacaoService } from '../../services/crud-votacao.service';
+import { StorageService as storage } from '../../services/storage.service';
 import { PadLeftPipe } from './../../pipes/padLeft.pipe';
 
 @Component({
@@ -30,6 +31,7 @@ export class HomeComponent implements OnInit {
   projetoId: any = null
   projeto: any = {}
   vereadores: any = []
+  vereador: any = {}
   isLoad = false
 
   constructor(
@@ -44,6 +46,7 @@ export class HomeComponent implements OnInit {
     try {
       this.route.params.subscribe(params => {
         this.projetoId = params['projeto']
+        // this.projetoId = "f5ef"
         this.carregarDados()
       })
     } catch (error) {
@@ -59,6 +62,9 @@ export class HomeComponent implements OnInit {
   async getProjetoById() {
     if (this.projetoId) {
       this.projeto = await this.projetoService.getById(this.projetoId)
+    } else {
+      const $res = await this.projetoService.getAll()
+      this.projeto = $res.find(x => moment(x.dtaVotacao, 'DD/MM/YYYY').unix() > moment().unix())
     }
   }
 
@@ -76,6 +82,9 @@ export class HomeComponent implements OnInit {
     this.totalVotos = 0
 
     for (let vereador of this.vereadores) {
+      if (vereador.id === storage.get('user'))
+        this.vereador = vereador
+
       const filter = { numProjeto: this.projeto.numProjeto, codVereador: vereador.id }
       const $res = await this.votacaoService.getAll(filter)
       vereador.votacao = $res?.find(x => x)
@@ -90,11 +99,9 @@ export class HomeComponent implements OnInit {
         this.ausentes++
       }
     }
-    setTimeout(() => {
-      this.cdr.detectChanges()      
-    }, 100);
-
+    
     this.totalVotos = this.votosSim + this.votosNao
+    this.cdr.detectChanges()
   }
 
   reload() {

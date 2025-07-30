@@ -33,11 +33,15 @@
             <td class="text-warning text-center" data-title="Abstenções">{{ item.abstencao }}</td>
             <td class="text-warning text-center" data-title="Sim">{{ item.sim }}</td>
             <td class="text-warning text-center" data-title="Não">{{ item.nao }}</td>
-            <td class="text-warning text-center" data-title="Ações">
-              <em *ngIf="item.flgVotacaoProj" [routerLink]="[ '/home/', item.id ]" class="bi bi-view-list fs-3"
-                role="button"></em>
-              <em *ngIf="!item.flgVotacaoProj" [routerLink]="[ '/home', item.id ]" class="bi bi-pencil-square fs-3"
-                role="button"></em>
+            <td data-title="Ações">
+              <div class="d-flex align-items-center">
+                @if (item?.flgVotacaoProj) {
+                <em [routerLink]="[ '/home/', item.id ]" class="bi bi-view-list fs-3" role="button"></em>
+                } @else {
+                <em class="bi bi-pencil-square fs-3" role="button" (click)="edit(item)"></em>
+                <em class="bi bi-dash-square-dotted text-danger ms-2 fs-3" (click)="excluir(item)"></em>
+                }
+              </div>
             </td>
           </tr>
           }
@@ -46,6 +50,8 @@
     </div>
   </div>
   <div class="d-flex gap-3">
+    <button class="btn btn-primary" (click)="getData()">Update</button>
     <button class="btn btn-primary" [routerLink]="['/home']">Home</button>
+    <button class="btn btn-primary" (click)="novoProjeto()">Novo</button>
   </div>
 </div>

@@ -11,7 +11,8 @@ export class DialogService {
 
   constructor(private overlay: Overlay, private injector: Injector) { }
 
-  open(data: { title: string; message: string }, component: any = AlertComponent): Promise<any> {
+  // default: { title: string; message: string }
+  open(data: any, component: any = AlertComponent): Promise<any> {
     return new Promise((resolve, reject) => {
       const overlayRef = this.overlay.create({
         hasBackdrop: true,

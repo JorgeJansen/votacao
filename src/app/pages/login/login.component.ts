@@ -1,11 +1,11 @@
 // import { CommonService } from 'src/app/shared/services/common.service';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UsefullFunctions } from '../../components/commons/usefullFunctions';
-import { DialogService } from '../../services/dialog.service';
-import { InvalidFeedbackComponent } from '../../components/invalid-feedback/invalid-feedback.component';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UsefullFunctions } from '../../components/commons/usefullFunctions';
+import { InvalidFeedbackComponent } from '../../components/invalid-feedback/invalid-feedback.component';
+import { DialogService } from '../../services/dialog.service';
 import { StorageService as storage } from '../../services/storage.service';
 // import { UsefullFunctions, valueOrDefault } from '../shared/commons/usefullFunctions';
 // import { UserTypeEnum } from '../shared/enums/user-type.enum';
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private dialogService: DialogService,
     private formBuilder: FormBuilder,
-    private router: Router,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -57,8 +57,16 @@ export class LoginComponent implements OnInit {
       delete form.type
       try {
         // const $res = await this.managerService.login(form)
-        if (form.email === 'manager_bradesco_1@robobanker.com.br' && form.password === '@admin1') {
+        if (form.email === 'presidente@camarauberlandia.com.br' && form.password === '1234') {
+          storage.save('user', '1')
           storage.save('is_authenticate', true)
+          storage.save('is_manager', true)
+          storage.save('client_jwt', 'fakjdfhqhiuerhjih#$%^^HJjghRGFHG%^%&^%')
+          this.router.navigate(['/home'])
+        } else if (form.email === 'badeco@camarauberlandia.com.br' && form.password === '1234') {
+          storage.save('user', '2')
+          storage.save('is_authenticate', true)
+          storage.save('is_manager', false)
           storage.save('client_jwt', 'fakjdfhqhiuerhjih#$%^^HJjghRGFHG%^%&^%')
           this.router.navigate(['/home'])
         } else {
