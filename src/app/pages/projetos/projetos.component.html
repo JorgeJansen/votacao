@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (item of dataTable; let i = $index; track i) {
+          @for (item of dataTable(); track item) {
           <tr>
             <td class="text-success" data-title="Nº">{{ item.numProjeto }}</td>
             <td class="text-warning" data-title="Nome">{{ item.nomProjeto }}</td>
@@ -34,7 +34,7 @@
             <td class="text-warning text-center" data-title="Sim">{{ item.sim }}</td>
             <td class="text-warning text-center" data-title="Não">{{ item.nao }}</td>
             <td data-title="Ações" class="text-center">
-              <div class="d-flex flex-wrap gap-2 justify-content-center align-items-center">
+              <div class="d-flex gap-2 justify-content-center align-items-center">
                 @if (item?.flgVotacaoProj) {
                 <em [routerLink]="[ '/home/', item.id ]" class="bi bi-view-list fs-3" role="button"></em>
                 } @else {

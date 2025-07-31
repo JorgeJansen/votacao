@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { valueOrDefault } from '../../../commons/usefullFunctions';
 import { InvalidFeedbackComponent } from '../../invalid-feedback/invalid-feedback.component';
 import { MODAL_DATA } from '../modal.token';
-
+import { MUNICIPIOS } from '../../../commons/municipios';
 @Component({
   selector: 'app-vereador-dialog',
   templateUrl: './vereador-dialog.component.html',
@@ -18,6 +18,7 @@ import { MODAL_DATA } from '../modal.token';
 export class VereadorDialogComponent implements OnInit {
 
   formGroup!: FormGroup;
+  municipio = MUNICIPIOS(310059) // TO DO: buscar esse ID no login
 
   constructor(
     @Inject(MODAL_DATA) public data: any,
@@ -30,7 +31,8 @@ export class VereadorDialogComponent implements OnInit {
       foto: this.data?.edit?.foto,
       nomVereador: [this.data?.edit?.nomVereador, Validators.required],
       sglPartido: this.data?.edit?.sglPartido,
-      indPresidente: valueOrDefault(this.data?.edit?.indPresidente, false)
+      indPresidente: valueOrDefault(this.data?.edit?.indPresidente, false),
+      municipio: valueOrDefault(this.data?.edit?.municipio, this.municipio)
     })
   }
 

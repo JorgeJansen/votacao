@@ -14,7 +14,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (item of dataTable; let i = $index; track item?.id) {
+          @for (item of dataTable(); track item) {
           <tr>
             <td data-title="Foto" class="text-primary text-center" [style.width.px]="70">
               @if (item?.image?.data) {

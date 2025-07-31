@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { UploadDialogComponent } from '../../components/dialogs/upload-dialog/upload-dialog.component';
@@ -20,7 +20,7 @@ import { ConfirmComponent } from './../../components/dialogs/confirm/confirm.com
 })
 export class VereadoresComponent implements OnInit {
 
-  dataTable?: any = []
+  dataTable?: any = signal([])
   cloneRow: { [s: string]: any } = {}
 
   constructor(
@@ -34,7 +34,7 @@ export class VereadoresComponent implements OnInit {
     try {
       this.getData()
     } catch (error) {
-      this.reload()
+      // this.reload()
     }
   }
 
@@ -43,13 +43,14 @@ export class VereadoresComponent implements OnInit {
   }
 
   async getData() {
-    this.dataTable = await this.vereadorService.getAll()
-    for (let item of this.dataTable) {
+    const $res = await this.vereadorService.getAll()
+    for (let item of $res) {
       if (item.foto) {
         item.image = await this.imageService.getById(item.foto)
       }
     }
-    this.cdr.detectChanges()
+    this.dataTable.set($res)
+    // this.cdr.detectChanges()
   }
 
   uploadDialog(item: any) {
@@ -66,17 +67,17 @@ export class VereadoresComponent implements OnInit {
   }
 
   edit(row: any) {
+    delete row.image
     this.cloneRow[row.id as string] = { ...row }
     this.dialogService.open({
-      title: 'Cadastro',
-      message: 'Dados do novo vereador',
+      title: 'Editar',
+      message: 'Dados do vereador',
       edit: row
     }, VereadorDialogComponent).then(async (item) => {
-      delete item.image
       if (this.cloneRow[row.indPresidente] !== item.indPresidente) {
         await this.vereadorService.update(row.id, item)
         // Só pode haver um presidente
-        const exPresidente = this.dataTable.find((el: any) => el.indPresidente)
+        const exPresidente = this.dataTable().find((el: any) => el.indPresidente)
         if (exPresidente) {
           exPresidente.indPresidente = false
           await this.vereadorService.update(exPresidente.id, exPresidente)

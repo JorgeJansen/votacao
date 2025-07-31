@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import moment from 'moment';
 import { CrudProjetoService } from '../../services/crud-projeto.service';
@@ -19,11 +19,12 @@ export class VotacaoComponent implements OnInit {
   today = moment().toDate()
   projetoId: any
   vereadorId: any
-  vereador: any = {}
-  projeto: any = {}
-  votacao: any = {}
+  vereador: any = signal({})
+  projeto: any = signal({})
+  votacao: any = signal({})
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private projetoService: CrudProjetoService,
     private route: ActivatedRoute,
     private router: Router,
@@ -39,19 +40,25 @@ export class VotacaoComponent implements OnInit {
     })
   }
 
-  async getDataById() {
-    this.projeto = await this.projetoService.getById(this.projetoId)
-    this.vereador = await this.vereadorService.getById(this.vereadorId)
+  ngAfterViewInit() {
+    this.cdr.detectChanges() // força renderização após o Angular terminar o ciclo
+  }
 
-    const filter = { numProjeto: this.projeto.numProjeto, codVereador: this.vereador.id }
+  async getDataById() {
+    const $proj = await this.projetoService.getById(this.projetoId)
+    this.projeto.set($proj)
+    const $ver = await this.vereadorService.getById(this.vereadorId)
+    this.vereador.set($ver)
+
+    const filter = { numProjeto: this.projeto().numProjeto, codVereador: this.vereador().id }
     const $vot = await this.votacaoService.getAll(filter)
-    this.votacao = $vot?.find((x: any) => x)
+    this.votacao.set($vot?.find((x: any) => x))
   }
 
   async computarVoto(voto: string) {
     const body = {
       codVereador: this.vereadorId,
-      numProjeto: this.projeto.numProjeto,
+      numProjeto: this.projeto().numProjeto,
       presente: true,
       voto: voto
     }

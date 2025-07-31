@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ConfirmComponent } from '../../components/dialogs/confirm/confirm.component';
 import { ProjetoDialogComponent } from '../../components/dialogs/projeto-dialog/projeto-dialog.component';
@@ -16,10 +16,10 @@ import { CrudProjetoService } from './../../services/crud-projeto.service';
 })
 export class ProjetosComponent implements OnInit {
 
-  dataTable: any = []
+  dataTable: any = signal([])
 
   constructor(
-    private crd: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef,
     private dialogService: DialogService,
     private projetoService: CrudProjetoService
   ) { }
@@ -28,13 +28,17 @@ export class ProjetosComponent implements OnInit {
     try {
       this.getData()
     } catch (error) {
-      this.reload()
+      // this.reload()
     }
   }
 
+  ngAfterViewInit() {
+    this.cdr.detectChanges() // força renderização após o Angular terminar o ciclo
+  }
+
   async getData() {
-    this.dataTable = await this.projetoService.getAll()
-    this.crd.detectChanges()
+    const $res = await this.projetoService.getAll()
+    this.dataTable.set($res)
   }
 
   edit(row: any) {

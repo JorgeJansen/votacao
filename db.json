@@ -1,11 +1,11 @@
 {
   "vereador": [
     {
-      "id": "1",
       "foto": "",
       "nomVereador": "John Doe",
       "sglPartido": "PSDB",
-      "indPresidente": true,
+      "indPresidente": false,
+      "id": "1",
       "municipio": {
         "codMunicipio": 310059,
         "nomMunicipio": "Uberlândia",
@@ -17,11 +17,11 @@
       }
     },
     {
-      "id": "2",
       "foto": "f8a7",
       "nomVereador": "Jane Smith",
-      "sglPartido": "PTB",
+      "sglPartido": "PC do B",
       "indPresidente": false,
+      "id": "2",
       "municipio": {
         "codMunicipio": 310059,
         "nomMunicipio": "Uberlândia",

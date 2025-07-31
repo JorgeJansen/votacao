@@ -12,16 +12,16 @@
       <h3 class="pt-1">ESCOLHA SEU VOTO</h3>
     </div>
     <div class="col-12 text-center bg-primary rounded">
-      <h3 class="pt-1">{{projeto?.numProjeto}} - {{projeto?.nomProjeto}}</h3>
+      <h3 class="pt-1">{{projeto()?.numProjeto}} - {{projeto()?.nomProjeto}}</h3>
     </div>
     <div class="col-12 text-white">
-      <h5>{{vereador?.nome}} - {{vereador?.sglPartido}}</h5>
+      <h5>{{vereador()?.nomVereador}} - {{vereador()?.sglPartido}}</h5>
     </div>
   </div>
   <div class="row gap-3 justify-content-center py-5 my-5">
-    @if (votacao?.voto === 'S' || votacao?.voto === 'N') {
-    <strong class="fs-1 text-center">O seu voto já foi computado como {{votacao?.voto ? 'SIM' : 'NÃO'}}</strong>
-    } @else if (votacao?.presente && votacao?.voto === '') {
+    @if (votacao()?.voto === 'S' || votacao()?.voto === 'N') {
+    <strong class="fs-1 text-center">O seu voto já foi computado como {{votacao()?.voto ? 'SIM' : 'NÃO'}}</strong>
+    } @else if (votacao()?.presente && votacao()?.voto === '') {
     <strong class="fs-1 text-center">Você se absteve dessa votação</strong>
     } @else {
     <button type="button" class="btn btn-lg btn-outline-primary col-2" (click)="computarVoto('S')">SIM</button>
