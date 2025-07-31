@@ -1,0 +1,39 @@
+<div class="modal fade show d-block" style="background-color: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content shadow">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ data.title }}</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ data.message }}</p>
+        <form [formGroup]="formGroup" class="row gap-3" autocomplete="off" novalidate>
+          <div class="form-group">
+            <label for="nomVereador" class="form-label">Nome completo</label>
+            <input type="text" class="form-control" formControlName="nomVereador">
+            <app-invalid-feedback [field]="f['nomVereador']"></app-invalid-feedback>
+          </div>
+          <div class="form-group">
+            <label for="sglPartido" class="form-label">Partido</label>
+            <input type="text" class="form-control" formControlName="sglPartido">
+            <app-invalid-feedback [field]="f['sglPartido']"></app-invalid-feedback>
+          </div>
+          <div class="form-group">
+            <label for="dtaVotacao" class="form-label">Presidente</label>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="indPresidente" switch
+                formControlName="indPresidente">
+              <label class="form-check-label" for="indPresidente">
+                Sim
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="close()">Cancelar</button>
+        <button class="btn btn-primary" (click)="confirm()">Criar</button>
+      </div>
+    </div>
+  </div>
+</div>
