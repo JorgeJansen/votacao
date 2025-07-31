@@ -7,6 +7,7 @@ import { CrudVereadorService } from '../../services/crud-vereador.service';
 import { CrudVotacaoService } from '../../services/crud-votacao.service';
 import { StorageService as storage } from '../../services/storage.service';
 import { PadLeftPipe } from './../../pipes/padLeft.pipe';
+import { TimerComponent } from '../../components/timer/timer.component';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ import { PadLeftPipe } from './../../pipes/padLeft.pipe';
     PadLeftPipe,
     RouterLink,
     RouterModule,
+    TimerComponent
   ]
 })
 export class HomeComponent implements OnInit {

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsefullFunctions } from '../../components/commons/usefullFunctions';
+import { UsefullFunctions } from '../../commons/usefullFunctions';
 import { InvalidFeedbackComponent } from '../../components/invalid-feedback/invalid-feedback.component';
 import { DialogService } from '../../services/dialog.service';
 import { StorageService as storage } from '../../services/storage.service';

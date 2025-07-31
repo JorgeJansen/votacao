@@ -1,6 +1,6 @@
 <div class="container py-5">
-  <div class="row gap-3 justify-content-around py-4 border-top">
-    <div class="col-12">
+  <div class="row justify-content-around py-4 border-top">
+    <div class="col-12 table-responsive">
       <table class="table table-dark align-middle">
         <thead>
           <tr>
@@ -33,13 +33,13 @@
             <td class="text-warning text-center" data-title="Abstenções">{{ item.abstencao }}</td>
             <td class="text-warning text-center" data-title="Sim">{{ item.sim }}</td>
             <td class="text-warning text-center" data-title="Não">{{ item.nao }}</td>
-            <td data-title="Ações">
-              <div class="d-flex align-items-center">
+            <td data-title="Ações" class="text-center">
+              <div class="d-flex flex-wrap gap-2 justify-content-center align-items-center">
                 @if (item?.flgVotacaoProj) {
                 <em [routerLink]="[ '/home/', item.id ]" class="bi bi-view-list fs-3" role="button"></em>
                 } @else {
                 <em class="bi bi-pencil-square fs-3" role="button" (click)="edit(item)"></em>
-                <em class="bi bi-dash-square-dotted text-danger ms-2 fs-3" (click)="excluir(item)"></em>
+                <em class="bi bi-dash-square-dotted text-danger fs-3" (click)="excluir(item)"></em>
                 }
               </div>
             </td>
@@ -49,7 +49,7 @@
       </table>
     </div>
   </div>
-  <div class="d-flex gap-3">
+  <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start mt-4">
     <button class="btn btn-primary" (click)="getData()">Update</button>
     <button class="btn btn-primary" [routerLink]="['/home']">Home</button>
     <button class="btn btn-primary" (click)="novoProjeto()">Novo</button>

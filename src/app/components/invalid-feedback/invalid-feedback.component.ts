@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms';
 export class InvalidFeedbackComponent {
 
   @Input() field?: any;
-  @Input() name = 'Field'
+  @Input() name = 'Campo'
   msgError: string = ''
 
   constructor(private renderer: Renderer2, hostElement: ElementRef) {
@@ -21,25 +21,25 @@ export class InvalidFeedbackComponent {
     if (field) {
       this.msgError = ''
       if (field.touched && field.errors?.['required']) {
-        this.msgError = 'Necessary field.'
+        this.msgError = `${this.name} obrigatório.`
       } else if (field.errors?.['invalidDate'] || field.errors?.['bsDate']) {
-        this.msgError = 'Invalid date.'
+        this.msgError = 'Data inválida.'
       } else if (field.errors?.['pattern']) {
-        this.msgError = `${this.name} invalid.`
+        this.msgError = `${this.name} inválido(a).`
       } else if (field.errors?.['invalid']) {
-        this.msgError = `${this.name} invalid.`
+        this.msgError = `${this.name} inválido(a).`
       } else if (field.errors?.['Mask error'] || field.errors?.['mask']) {
-        this.msgError = `${this.name} invalid.`
+        this.msgError = `${this.name} inválido(a).`
       } else if (field.errors?.['min']) {
-        this.msgError = `Minimum value ${field.errors?.['min']?.min}.`
+        this.msgError = `Valor mínimo ${field.errors?.['min']?.min}.`
       } else if (field.errors?.['max']) {
-        this.msgError = `Maximum value ${field.errors?.['max'].max}.`
+        this.msgError = `Valor máximo ${field.errors?.['max'].max}.`
       } else if (field.errors?.['doNotMatch']) {
-        this.msgError = `Passwords not matching.`
+        this.msgError = `Senhas não coincidentes.`
       } else if (field.errors?.['minlength']) {
-        this.msgError = `Minimum of ${field.errors?.['minlength'].requiredLength} characters`
+        this.msgError = `Mínimo de ${field.errors?.['minlength'].requiredLength} caracteres`
       } else if (field.errors?.['maxlength']) {
-        this.msgError = `Max of ${field.errors?.['maxlength'].requiredLength} characters`
+        this.msgError = `Máximo de ${field.errors?.['maxlength'].requiredLength} caracteres`
       }
       return this.msgError != ''
     }

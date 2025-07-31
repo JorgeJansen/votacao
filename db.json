@@ -5,56 +5,128 @@
       "foto": "",
       "nomVereador": "John Doe",
       "sglPartido": "PSDB",
-      "indPresidente": true
+      "indPresidente": true,
+      "municipio": {
+        "codMunicipio": 310059,
+        "nomMunicipio": "Uberlândia",
+        "uf": {
+          "id": 31,
+          "sigla": "MG",
+          "nome": "Minas Gerais"
+        }
+      }
     },
     {
       "id": "2",
       "foto": "f8a7",
       "nomVereador": "Jane Smith",
       "sglPartido": "PTB",
-      "indPresidente": false
+      "indPresidente": false,
+      "municipio": {
+        "codMunicipio": 310059,
+        "nomMunicipio": "Uberlândia",
+        "uf": {
+          "id": 31,
+          "sigla": "MG",
+          "nome": "Minas Gerais"
+        }
+      }
     },
     {
       "id": "3",
       "foto": "cec6",
       "nomVereador": "Alice Johnson",
       "sglPartido": "SOLIDARIEDADE",
-      "indPresidente": false
+      "indPresidente": false,
+      "municipio": {
+        "codMunicipio": 310059,
+        "nomMunicipio": "Uberlândia",
+        "uf": {
+          "id": 31,
+          "sigla": "MG",
+          "nome": "Minas Gerais"
+        }
+      }
     },
     {
       "id": "4",
       "foto": "",
       "nomVereador": "Bob Brown",
       "sglPartido": "CIDADANIA",
-      "indPresidente": false
+      "indPresidente": false,
+      "municipio": {
+        "codMunicipio": 310059,
+        "nomMunicipio": "Uberlândia",
+        "uf": {
+          "id": 31,
+          "sigla": "MG",
+          "nome": "Minas Gerais"
+        }
+      }
     },
     {
       "id": "5",
       "foto": "",
       "nomVereador": "Charlie White",
       "sglPartido": "PSL",
-      "indPresidente": false
+      "indPresidente": false,
+      "municipio": {
+        "codMunicipio": 310059,
+        "nomMunicipio": "Uberlândia",
+        "uf": {
+          "id": 31,
+          "sigla": "MG",
+          "nome": "Minas Gerais"
+        }
+      }
     },
     {
       "id": "6",
       "foto": "",
       "nomVereador": "Diana Green",
       "sglPartido": "PT",
-      "indPresidente": false
+      "indPresidente": false,
+      "municipio": {
+        "codMunicipio": 310059,
+        "nomMunicipio": "Uberlândia",
+        "uf": {
+          "id": 31,
+          "sigla": "MG",
+          "nome": "Minas Gerais"
+        }
+      }
     },
     {
       "id": "7",
       "foto": "",
       "nomVereador": "Ethan Blue",
       "sglPartido": "PL",
-      "indPresidente": false
+      "indPresidente": false,
+      "municipio": {
+        "codMunicipio": 310059,
+        "nomMunicipio": "Uberlândia",
+        "uf": {
+          "id": 31,
+          "sigla": "MG",
+          "nome": "Minas Gerais"
+        }
+      }
     },
     {
+      "id": "8",
       "foto": "",
       "nomVereador": "Fiona Black",
       "sglPartido": "PMDB",
       "indPresidente": false,
-      "id": "8"
+      "municipio": {
+        "codMunicipio": 310059,
+        "nomMunicipio": "Uberlândia",
+        "uf": {
+          "id": 31,
+          "sigla": "MG",
+          "nome": "Minas Gerais"
+        }
+      }
     }
   ],
   "projeto": [
@@ -69,6 +141,8 @@
       "abstencao": 2,
       "sim": 4,
       "nao": 1,
+      "indAbrirVotacao": "N",
+      "indPainelVotacao": "S",
       "codMunicipio": 310059
     },
     {
@@ -82,6 +156,8 @@
       "abstencao": 0,
       "sim": 0,
       "nao": 0,
+      "indAbrirVotacao": "N",
+      "indPainelVotacao": "S",
       "codMunicipio": 310059
     }
   ],

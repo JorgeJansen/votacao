@@ -1,10 +1,35 @@
 @use 'bootstrap/scss/bootstrap';
 
-html {
+html,
+body {
   margin: 0;
   padding: 0;
   font-size: 14px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   height: 100vh;
+}
+
+@media screen and (max-width: 320px) {
+  html {
+    font-size: calc(12px + 6 * ((100vw - 320px) / 680));
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+body {
+  letter-spacing: 0.02em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100% !important;
+  height: 100%;
+  overflow: auto;
 }
 
 .modal {
@@ -24,5 +49,24 @@ html {
 .fs-7 {
   font-size: .85rem !important;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.bs-timepicker-field.is-invalid,
+.ng-dirty.ng-invalid,
+.ng-touched.ng-invalid {
+  background-image: none;
+  border-color: var(--bs-danger);
+
+  ~.invalid-feedback {
+    display: block;
+  }
+}
+
+.timer-display {
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--bs-success);
+  background: #000;
+  padding: 5px 20px;
+  border-radius: 10px;
+  display: inline-block;
+}
