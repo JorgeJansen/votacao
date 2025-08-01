@@ -48,8 +48,8 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     try {
       this.route.params.subscribe(params => {
-        // this.projetoId = params['projeto']
-        this.elements().projetoId = 'f5ef'
+        if (params['projeto'])
+          this.elements().projetoId = params['projeto']
       })
       this.carregarDados()
     } catch (error) {
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
       this.projeto.set($res)
     } else {
       const $res = await this.projetoService.getAll()
-      this.projeto.set($res.find(x => moment(x.dtaVotacao, 'DD/MM/YYYY').unix() > moment().unix()))
+      this.projeto.set($res.find(x => x.dtaVotacao > moment().unix()))
     }
   }
 
@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit {
       if (item.id === storage.get('user'))
         this.vereador.set(item)
 
-      const filter = { numProjeto: this.projeto().numProjeto, codVereador: item.id }
+      const filter = { numProjeto: this.projeto().codProjeto, codVereador: item.codVereador }
       const $res = await this.votacaoService.getAll(filter)
       item.votacao = $res?.find(x => x)
 

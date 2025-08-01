@@ -12,22 +12,22 @@ export class CrudProjetoService {
   ) { }
 
   getAll(filter?: any): Promise<any[]> {
-    return firstValueFrom(this.httpClient.get<any[]>(`api/projeto`, { params: filter }))
+    return firstValueFrom(this.httpClient.get<any[]>(`projeto`, { params: filter }))
   }
 
   getById(id: any, filter?: any): Promise<any> {
-    return firstValueFrom(this.httpClient.get<any>(`api/projeto/${id}`, { params: filter }))
+    return firstValueFrom(this.httpClient.get<any>(`projeto/${id}`, { params: filter }))
   }
 
   save(body: any): Promise<any> {
-    return firstValueFrom(this.httpClient.post<any>(`/api/projeto`, body))
+    return firstValueFrom(this.httpClient.post<any>(`/projeto`, body))
   }
 
   update(id: any, body: any): Promise<any> {
-    return firstValueFrom(this.httpClient.put<any>(`/api/projeto/${id}`, body))
+    return firstValueFrom(this.httpClient.put<any>(`/projeto/${id}`, body))
   }
 
   delete(id: any): Promise<any> {
-    return firstValueFrom(this.httpClient.delete<any>(`/api/projeto/${id}`))
+    return firstValueFrom(this.httpClient.delete<any>(`/projeto/${id}`))
   }
 }

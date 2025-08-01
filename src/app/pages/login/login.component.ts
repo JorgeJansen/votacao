@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { UsefullFunctions } from '../../commons/usefullFunctions';
 import { InvalidFeedbackComponent } from '../../components/invalid-feedback/invalid-feedback.component';
+import { CrudTokenService } from '../../services/crud-token.service';
 import { DialogService } from '../../services/dialog.service';
 import { StorageService as storage } from '../../services/storage.service';
 // import { UsefullFunctions, valueOrDefault } from '../shared/commons/usefullFunctions';
@@ -37,8 +38,11 @@ export class LoginComponent implements OnInit {
   constructor(
     private dialogService: DialogService,
     private formBuilder: FormBuilder,
-    private router: Router
-  ) { }
+    private router: Router,
+    private tokenService: CrudTokenService
+  ) {
+    storage.clear()
+  }
 
   ngOnInit(): void {
     this.formLogin = this.formBuilder.group({
@@ -56,23 +60,9 @@ export class LoginComponent implements OnInit {
       const form = this.formLogin.getRawValue()
       delete form.type
       try {
-        // const $res = await this.managerService.login(form)
-        if (form.email === 'presidente@camarauberlandia.com.br' && form.password === '1234') {
-          storage.save('user', '1')
-          storage.save('is_authenticate', true)
-          storage.save('is_manager', true)
-          storage.save('client_jwt', 'fakjdfhqhiuerhjih#$%^^HJjghRGFHG%^%&^%')
-          this.router.navigate(['/home'])
-        } else if (form.email === 'badeco@camarauberlandia.com.br' && form.password === '1234') {
-          storage.save('user', '2')
-          storage.save('is_authenticate', true)
-          storage.save('is_manager', false)
-          storage.save('client_jwt', 'fakjdfhqhiuerhjih#$%^^HJjghRGFHG%^%&^%')
-          this.router.navigate(['/home'])
-        } else {
-          const data = { title: 'Login not authorized', message: 'Please check email and password for the chosen user type' }
-          this.dialogService.open(data)
-        }
+        await this.tokenService.authenticate(form)
+        this.tokenService.isAuthenticate()
+        this.router.navigate(['/home'])
       } catch (_err) {
         const data = { title: 'Login not authorized', message: 'Please check email and password for the chosen user type' }
         this.dialogService.open(data)

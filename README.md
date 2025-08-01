@@ -1,3 +1,13 @@
+Run 
+* npm install
+
+Add app.config.json to:
+* src\assets\config\app.config.json
+* copy one of the existing configs
+
+Run:
+* Angular CLI Server
+
 # Votacao
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.

@@ -11,22 +11,22 @@ export class CrudVereadorService {
   ) { }
 
   getAll(filter?: any): Promise<any[]> {
-    return firstValueFrom(this.httpClient.get<any[]>(`api/vereador`, { params: filter }))
+    return firstValueFrom(this.httpClient.get<any[]>(`vereador`, { params: filter }))
   }
 
   getById(id: any, filter?: any): Promise<any> {
-    return firstValueFrom(this.httpClient.get<any>(`api/vereador/${id}`, { params: filter }))
+    return firstValueFrom(this.httpClient.get<any>(`vereador/${id}`, { params: filter }))
   }
 
   save(body: any): Promise<any> {
-    return firstValueFrom(this.httpClient.post<any>(`/api/vereador`, body))
+    return firstValueFrom(this.httpClient.post<any>(`/vereador`, body))
   }
 
   update(id: any, body: any): Promise<any> {
-    return firstValueFrom(this.httpClient.put<any>(`/api/vereador/${id}`, body))
+    return firstValueFrom(this.httpClient.put<any>(`/vereador/${id}`, body))
   }
 
   delete(id: any): Promise<any> {
-    return firstValueFrom(this.httpClient.delete<any>(`/api/vereador/${id}`))
+    return firstValueFrom(this.httpClient.delete<any>(`/vereador/${id}`))
   }
 }

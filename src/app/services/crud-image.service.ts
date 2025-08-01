@@ -12,22 +12,22 @@ export class CrudImageService {
   ) { }
 
   getAll(filter?: any): Promise<any[]> {
-    return firstValueFrom(this.httpClient.get<any[]>(`api/images`, { params: filter }))
+    return firstValueFrom(this.httpClient.get<any[]>(`images`, { params: filter }))
   }
 
   getById(id: any, filter?: any): Promise<any> {
-    return firstValueFrom(this.httpClient.get<any>(`api/images/${id}`, { params: filter }))
+    return firstValueFrom(this.httpClient.get<any>(`images/${id}`, { params: filter }))
   }
 
   save(body: any): Promise<any> {
-    return firstValueFrom(this.httpClient.post<any>(`/api/images`, body))
+    return firstValueFrom(this.httpClient.post<any>(`/images`, body))
   }
 
   update(id: any, body: any): Promise<any> {
-    return firstValueFrom(this.httpClient.put<any>(`/api/images/${id}`, body))
+    return firstValueFrom(this.httpClient.put<any>(`/images/${id}`, body))
   }
 
   delete(id: any): Promise<any> {
-    return firstValueFrom(this.httpClient.delete<any>(`/api/images/${id}`))
+    return firstValueFrom(this.httpClient.delete<any>(`/images/${id}`))
   }
 }

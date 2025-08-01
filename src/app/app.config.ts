@@ -2,10 +2,11 @@ import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners, provi
 import { provideRouter, RouteReuseStrategy, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 
 import { registerLocaleData } from '@angular/common';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { routes } from './app.routes';
+import { tokenInterceptorFn } from './interceptors/token.interceptor';
 
 registerLocaleData(localePt);
 class NoReuseStrategy implements RouteReuseStrategy {
@@ -25,8 +26,8 @@ export const appConfig: ApplicationConfig = {
     }), withInMemoryScrolling({
       scrollPositionRestoration: 'enabled'
     })), provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([tokenInterceptorFn])),
     { provide: RouteReuseStrategy, useClass: NoReuseStrategy },
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
-  ]
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+  ],
 };

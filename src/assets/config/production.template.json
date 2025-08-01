@@ -1,0 +1,9 @@
+{
+  "API_ENV": "production",
+  "API_DEBUG": false,
+  "API_HOST": "camarabackend-production.up.railway.app",
+  "API_PORT": 443,
+  "API_PROT": "https",
+  "API_BASE": "",
+  "PROJECT_NAME": "votacao"
+}
