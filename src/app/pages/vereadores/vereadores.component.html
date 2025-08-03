@@ -8,6 +8,7 @@
             <th scope="col">Nome</th>
             <th scope="col">Partido</th>
             <th scope="col">Presidente</th>
+            <th scope="col">Município</th>
             <th>
               <!-- Comandos -->
             </th>
@@ -33,6 +34,9 @@
             </td>
             <td data-title="Presidente" class="text-warning fw-bold ps-md-4">
               {{ item?.indPresidente ? 'Sim' : 'Não' }}
+            </td>
+            <td data-title="Município" class="text-warning fw-bold">
+              {{ item?.municipio?.nomMunicipio }} / {{ item?.municipio?.uf?.sigla }}
             </td>
             <td data-title="Comandos" class="text-center">
               <div class="d-flex gap-2 justify-content-center align-items-center">

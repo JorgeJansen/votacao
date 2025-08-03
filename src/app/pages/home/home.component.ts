@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     votosSim: 0,
     votosNao: 0,
     totalVotos: 0,
-    projetoId: null
+    codProjeto: null
   })
   projeto: any = signal({})
   vereadores: any = signal([])
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
     try {
       this.route.params.subscribe(params => {
         if (params['projeto'])
-          this.elements().projetoId = params['projeto']
+          this.elements().codProjeto = params['projeto']
       })
       this.carregarDados()
     } catch (error) {
@@ -67,8 +67,8 @@ export class HomeComponent implements OnInit {
   }
 
   async getProjetoById() {
-    if (this.elements().projetoId) {
-      const $res = await this.projetoService.getById(this.elements().projetoId)
+    if (this.elements().codProjeto) {
+      const $res = await this.projetoService.getById(this.elements().codProjeto)
       this.projeto.set($res)
     } else {
       const $res = await this.projetoService.getAll()
@@ -90,10 +90,10 @@ export class HomeComponent implements OnInit {
     let totalVotos = 0
 
     for (let item of this.vereadores()) {
-      if (item.id === storage.get('user'))
+      if (item.codVereador === storage.get('user'))
         this.vereador.set(item)
 
-      const filter = { numProjeto: this.projeto().codProjeto, codVereador: item.codVereador }
+      const filter = { codProjeto: this.projeto().codProjeto, codVereador: item.codVereador }
       const $res = await this.votacaoService.getAll(filter)
       item.votacao = $res?.find(x => x)
 
@@ -114,7 +114,7 @@ export class HomeComponent implements OnInit {
       votosSim: votosSim,
       votosNao: votosNao,
       totalVotos: totalVotos,
-      projetoId: null
+      codProjeto: null
     })
   }
 

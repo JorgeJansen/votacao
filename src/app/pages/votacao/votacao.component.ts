@@ -17,8 +17,8 @@ import { CrudVotacaoService } from './../../services/crud-votacao.service';
 export class VotacaoComponent implements OnInit {
 
   today = moment().toDate()
-  projetoId: any
-  vereadorId: any
+  codProjeto: any
+  codVereador: any
   vereador: any = signal({})
   projeto: any = signal({})
   votacao: any = signal({})
@@ -34,8 +34,8 @@ export class VotacaoComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.projetoId = params['projeto']
-      this.vereadorId = params['vereador']
+      this.codProjeto = params['projeto']
+      this.codVereador = params['vereador']
       this.getDataById()
     })
   }
@@ -45,9 +45,9 @@ export class VotacaoComponent implements OnInit {
   }
 
   async getDataById() {
-    const $proj = await this.projetoService.getById(this.projetoId)
+    const $proj = await this.projetoService.getById(this.codProjeto)
     this.projeto.set($proj)
-    const $ver = await this.vereadorService.getById(this.vereadorId)
+    const $ver = await this.vereadorService.getById(this.codVereador)
     this.vereador.set($ver)
 
     const filter = { numProjeto: this.projeto().numProjeto, codVereador: this.vereador().id }
@@ -57,12 +57,12 @@ export class VotacaoComponent implements OnInit {
 
   async computarVoto(voto: string) {
     const body = {
-      codVereador: this.vereadorId,
+      codVereador: this.codVereador,
       numProjeto: this.projeto().numProjeto,
       presente: true,
       voto: voto
     }
     await this.votacaoService.save(body);
-    this.router.navigate(['/home/', this.projetoId])
+    this.router.navigate(['/home/', this.codProjeto])
   }
 }

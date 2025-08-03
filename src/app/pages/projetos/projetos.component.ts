@@ -5,6 +5,7 @@ import { ConfirmComponent } from '../../components/dialogs/confirm/confirm.compo
 import { ProjetoDialogComponent } from '../../components/dialogs/projeto-dialog/projeto-dialog.component';
 import { DialogService } from '../../services/dialog.service';
 import { CrudProjetoService } from './../../services/crud-projeto.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-projetos',
@@ -38,6 +39,9 @@ export class ProjetosComponent implements OnInit {
 
   async getData() {
     const $res = await this.projetoService.getAll()
+    $res.map(x => {
+      x.dtaVotacao = moment.unix(x.dtaVotacao).toDate()
+    })
     this.dataTable.set($res)
   }
 
@@ -47,7 +51,7 @@ export class ProjetosComponent implements OnInit {
       message: 'Dados do projeto',
       edit: row
     }, ProjetoDialogComponent).then(async (item) => {
-      await this.projetoService.update(row.id, item)
+      await this.projetoService.update(row.codProjeto, item)
       await this.getData()
     }).catch(() => {
       console.log('Usuário cancelou ou fechou')
@@ -59,7 +63,7 @@ export class ProjetosComponent implements OnInit {
       title: 'Excluir',
       message: `Tem certeza que deseja remover os dados do projeto ${item.numProjeto}`,
     }, ConfirmComponent).then(async () => {
-      await this.projetoService.delete(item.id)
+      await this.projetoService.delete(item.codProjeto)
       await this.getData()
     }).catch(() => {
       console.log('Usuário cancelou ou fechou')

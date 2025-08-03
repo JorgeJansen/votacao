@@ -58,8 +58,8 @@ export class VereadoresComponent implements OnInit {
       title: 'Upload',
       message: 'Selecione a imagem',
     }, UploadDialogComponent).then(async (file) => {
-      item.foto = file.id
-      await this.vereadorService.update(item.id, item)
+      item.foto = file.codVereador
+      await this.vereadorService.update(item.codVereador, item)
       this.getData()
     }).catch(() => {
       console.log('Usuário cancelou ou fechou')
@@ -68,22 +68,22 @@ export class VereadoresComponent implements OnInit {
 
   edit(row: any) {
     delete row.image
-    this.cloneRow[row.id as string] = { ...row }
+    this.cloneRow[row.codVereador as string] = { ...row }
     this.dialogService.open({
       title: 'Editar',
       message: 'Dados do vereador',
       edit: row
     }, VereadorDialogComponent).then(async (item) => {
       if (this.cloneRow[row.indPresidente] !== item.indPresidente) {
-        await this.vereadorService.update(row.id, item)
+        await this.vereadorService.update(row.codVereador, item)
         // Só pode haver um presidente
         const exPresidente = this.dataTable().find((el: any) => el.indPresidente)
         if (exPresidente) {
           exPresidente.indPresidente = false
-          await this.vereadorService.update(exPresidente.id, exPresidente)
+          await this.vereadorService.update(exPresidente.codVereador, exPresidente)
         }
       } else {
-        await this.vereadorService.update(row.id, row)
+        await this.vereadorService.update(row.codVereador, row)
       }
 
       await this.getData()
@@ -97,7 +97,7 @@ export class VereadoresComponent implements OnInit {
       title: 'Excluir',
       message: `Tem certeza que deseja remover os dados do vereador ${item.nomVereador}`,
     }, ConfirmComponent).then(async () => {
-      await this.vereadorService.delete(item.id)
+      await this.vereadorService.delete(item.codVereador)
       await this.getData()
     }).catch(() => {
       console.log('Usuário cancelou ou fechou')

@@ -103,19 +103,19 @@
 
   <!-- Botões -->
   <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mt-3">
-    @if (vereador()?.id) {
-    <button type="button" class="btn btn-primary" [routerLink]="['/votacao', elements().projetoId, vereador().id]"
+    <!-- @if (vereador()?.codVereador) { -->
+    <button type="button" class="btn btn-primary" [routerLink]="['/votacao', elements().projetoId, vereador().codVereador]"
       [disabled]="!projeto()?.flgVotacaoProj || vereador()?.votacao?.voto !== ''">
       Votar
     </button>
-    }
+    <!-- } -->
 
     <button class="btn btn-primary" (click)="getListVereadores()">Update</button>
 
-    @if (vereador()?.indPresidente) {
+    <!-- @if (vereador()?.indPresidente) { -->
     <button class="btn btn-primary" [routerLink]="['/vereadores']">Cadastro de vereadores</button>
     <button class="btn btn-primary" [routerLink]="['/projetos']">Verificar Projetos</button>
-    }
+    <!-- } -->
 
     <button class="btn btn-primary" [routerLink]="['/login']">Logout</button>
   </div>
