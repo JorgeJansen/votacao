@@ -1,10 +1,14 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { Component, Inject } from '@angular/core';
 import { MODAL_DATA } from '../modal.token';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-alert',
-  templateUrl: './alert.component.html'
+  templateUrl: './alert.component.html',
+  imports: [
+    CommonModule
+  ]
 })
 export class AlertComponent {
 

@@ -1,7 +1,7 @@
 <div class="modal fade show d-block" style="background-color: rgba(0,0,0,0.5);">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content shadow">
-      <div class="modal-header">
+      <div class="modal-header border-{{data.level}}">
         <h5 class="modal-title">{{ data.title }}</h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
       </div>
@@ -9,7 +9,7 @@
         <p [innerHTML]="data.message"></p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" (click)="confirm()">OK</button>
+        <button class="btn btn-{{data.level || 'primary'}}" (click)="confirm()">OK</button>
       </div>
     </div>
   </div>

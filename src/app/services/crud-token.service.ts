@@ -42,7 +42,7 @@ export class CrudTokenService {
 
   isAuthenticate() {
     const token = storage.client_jwt()
-    if (JSON.parse(storage.get('is_authenticate')) && this.isTokenExpired(token)) {
+    if (storage.get('is_authenticate') && this.isTokenExpired(token)) {
       storage.save('is_authenticate', false)
       this.refreshJWT(token)
     }
@@ -78,7 +78,6 @@ export class CrudTokenService {
     const url = this.makeUri(['/jwt', jwt])
     return firstValueFrom(this.httpClient.put(url, {}, { observe: 'response' })).then((res: any) => {
       storage.save('is_authenticate', true)
-      // storage.save('client_jwt', res['body']['jwt'])
       return res
     }).catch((err: any) => {
       return err
@@ -156,7 +155,9 @@ export class CrudTokenService {
         if (response.error?.errors?.code || response.error?.error?.code) {
           msgError = 'Invalid authentication code'
         }
-        else if (response.error?.errors) {
+        else if (response.error?.error && response.error?.error !== msgError) {
+          msgError = response.error.error
+        } else if (response.error?.errors) {
           let errorKeys = Object.keys(response.error.errors)
           if (errorKeys) {
             msgError = ""
@@ -173,7 +174,6 @@ export class CrudTokenService {
           }
           else {
             if (response.error.errors.manager?.length || response.error.errors.partner?.length) {
-              // msgError = response.error.errors.manager[0]
               msgError = 'User not found - please check email and user type'
             }
             else {
@@ -192,26 +192,12 @@ export class CrudTokenService {
         break
       case 401:
       case 403:
-        const json = response.error?.errors || response.error
-        let msg = json?.msg || json?.message
-        // if ('jwt' in json && json?.jwt?.length > 0) {
-        //   msg = json['jwt'][0]
-        // }
-        // // logout if expired token
-        // if (msg === 'expired token' || msg === 'jwt decode error' || msg === 'this jwt was revoked' || msg === 'this jwt is wrong'
-        //   || msg === 'this jwt is wrong, invalid or missing') {
-        //   this.router.navigate(['login'])
-        //   storage.clear()
-        //   return Promise.reject(response)
-        // }
-        if (msg)
-          msgError = msg
-        break
       case 404:
-        msgError = response.error?.errors?.msg
+        if (response.error?.error && response.error?.error !== msgError)
+          msgError = response.error?.error
         break
       case 500:
-        msgError = '500 - Internal Server Error'
+        msgError = 'Internal Server Error'
         break
     }
 
@@ -225,10 +211,9 @@ export class CrudTokenService {
       ${Description ? ' - Description: ' + Description : ''}
       ${DetalhesAdicionais ? ' - Additional Details: ' + DetalhesAdicionais : ''}`
 
-      const level = statusCode >= 500 ? 'danger' : statusCode >= 400 ? 'warning' : 'info'
-      // this.dialogService.log(msgError, statusCode, response.url, description, level)
-      // const data = { title: 'Ops!', message: `<p class="mb-0">${statusCode} - ${response.url}</p><p class="mb-0">${msgError}</p>` }
-      // this.dialogService.open(data)
+      const level = statusCode >= 500 ? 'danger' : statusCode >= 400 ? 'warning' : 'primary'
+      const data = { title: 'Ops!', level: level, message: `<p class="mb-0">${statusCode} - ${response.url}</p><p class="mb-0">${msgError}</p>` }
+      this.dialogService.open(data)
     }
 
     return Promise.reject(response)
