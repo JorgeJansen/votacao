@@ -40,7 +40,7 @@ export class ProjetosComponent implements OnInit {
   async getData() {
     const $res = await this.projetoService.getAll()
     $res.map(x => {
-      x.dtaVotacao = moment.unix(x.dtaVotacao).toDate()
+      x.dtaVotacao = moment(x.dtaVotacao).toDate()
     })
     this.dataTable.set($res)
   }
@@ -51,6 +51,7 @@ export class ProjetosComponent implements OnInit {
       message: 'Dados do projeto',
       edit: row
     }, ProjetoDialogComponent).then(async (item) => {
+      item.dtaVotacao = moment(item.dtaVotacao, 'DD/MM/YYYY').unix()
       await this.projetoService.update(row.codProjeto, item)
       await this.getData()
     }).catch(() => {
